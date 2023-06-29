@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { FaTwitter } from "react-icons/fa";
 
-// const text = document.getElementsById("text");
-// console.log(text); //
-// fetch(`https://dummyjson.com/quotes/${numRun}`)
-//   .then((res) => res.json())
-//   .then(console.log);
-// text.innerHTML = "133";
-const Panel = () => {
+const Panel = (props) => {
   const [data, setData] = useState(null);
-  const numRand = Math.round(Math.random() * 30);
+  const [classesList, setClassesList] = useState(props.initialClassesList);
+  let dataLength = data ? data.quotes.length : "there is no data";
+  const numRand = Math.round(Math.random() * dataLength);
+
+  const onButtonClick = () => {
+    setData(data);
+    setClassesList("quote-class");
+  };
 
   useEffect(() => {
     async function quotesAPI() {
       try {
         const response = await fetch("https://dummyjson.com/quotes");
         const data = await response.json();
-        console.log(data.quotes.length); //
         setData(data);
+        // console.log(data.quotes[numRand].quote); //
+        // console.log(data.quotes[numRand].author); //
+        // console.log(data.quotes[numRand].id); //
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error
@@ -26,24 +29,6 @@ const Panel = () => {
     }
     quotesAPI();
   }, []);
-  // const quotesAPI = fetch("https://dummyjson.com/quotes")
-  //   .then((response) => response.json())
-  //   .then((quotes) => {
-  //     console.log(quotes.quotes.length); //
-  //     console.log(quotes.quotes[numRand].quote); //
-  //     console.log(quotes.quotes[numRand].author); //
-  //   });
-  // // console.log(quoteRand); // object
-
-  // const quotes2 = async () => {
-  //   try {
-  //     const quoteOrigin = await quotesAPI;
-  //     console.log(quoteOrigin); //
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-  // quotes2();
 
   return (
     <div
@@ -51,24 +36,37 @@ const Panel = () => {
       className="bg-[#d6d7da] rounded-[5px] m-10 text-[18px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)] hover:bg-[#f3f4f5] hover:shadow-[2px_2px_2px_rgba(0,0,0,0.5)]
     mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-2"
     >
-      <p id="text">{"data"}</p>
-      <p id="author">author {numRand}</p>
-      <div>
-        <a
-          id="tweet-quote"
-          title="Tweet this quote!"
-          target="_top"
-          href="https://twitter.com/intent/tweet?hashtags=quotes"
-        >
-          <FaTwitter />
-        </a>
-        <button
-          onClick={() => numRand}
-          id="new-quote"
-          className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xl font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 hover:bg-purple-50"
-        >
-          New quote
-        </button>
+      {data && (
+        <div>
+          <p className={classesList} id="text">
+            "{data.quotes[numRand].quote}"
+          </p>
+          {/* got to move this span to the right */}
+          <span id="author" className="text-[1em] text-right">
+            - {data.quotes[numRand].author}
+          </span>
+        </div>
+      )}
+      <div className="flex flex-row justify-between mt-4 px-4">
+        <div>
+          <a
+            id="tweet-quote"
+            title="Tweet this quote!"
+            target="_top"
+            href="https://twitter.com/intent/tweet?hashtags=quotes"
+          >
+            <FaTwitter />
+          </a>
+        </div>
+        <div>
+          <button
+            onClick={onButtonClick}
+            id="new-quote"
+            className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xl font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 hover:bg-purple-50"
+          >
+            New quote
+          </button>
+        </div>
       </div>
     </div>
   );
