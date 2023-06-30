@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaTwitter } from "react-icons/fa";
+import generateRandomNum from "../utils/generateRandomNum";
 
 const Panel = (props) => {
+  console.log(props); //
   const [data, setData] = useState(null);
   const [classesList, setClassesList] = useState(props.initialClassesList);
-  let dataLength = data ? data.quotes.length : "there is no data";
-  const numRand = Math.round(Math.random() * dataLength);
+  // we need to pass the data (maxNum) to function generateRandomNum it is hardcoding for now to 30
+  let maxNum = data ? data.quotes.length : "there is no data";
 
   const onButtonClick = () => {
     setData(data);
@@ -39,11 +41,11 @@ const Panel = (props) => {
       {data && (
         <div>
           <p className={classesList} id="text">
-            "{data.quotes[numRand].quote}"
+            "{data.quotes[generateRandomNum(props.maxNum)].quote}"
           </p>
           {/* got to move this span to the right */}
           <span id="author" className="text-[1em] text-right">
-            - {data.quotes[numRand].author}
+            - {data.quotes[generateRandomNum(props.maxNum)].author}
           </span>
         </div>
       )}
