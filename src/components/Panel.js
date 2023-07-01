@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { FaTwitter } from "react-icons/fa";
 import generateRandomNum from "../utils/generateRandomNum";
+import generateRandomNumberForColor from "../utils/generateRandomNumberForColor";
 
 const Panel = (props) => {
-  console.log(props); //
   const [data, setData] = useState(null);
+  const [randomNum, setRandomNum] = useState(null);
   const [classesList, setClassesList] = useState(props.initialClassesList);
-  // we need to pass the data (maxNum) to function generateRandomNum it is hardcoding for now to 30
-  let maxNum = data ? data.quotes.length : "there is no data";
+  const maxNum = data ? data.quotes.length : "there is no data";
 
   const onButtonClick = () => {
     setData(data);
     setClassesList("quote-class");
+    setRandomNum(generateRandomNum(maxNum));
   };
 
   useEffect(() => {
@@ -20,9 +21,6 @@ const Panel = (props) => {
         const response = await fetch("https://dummyjson.com/quotes");
         const data = await response.json();
         setData(data);
-        // console.log(data.quotes[numRand].quote); //
-        // console.log(data.quotes[numRand].author); //
-        // console.log(data.quotes[numRand].id); //
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error
@@ -41,30 +39,32 @@ const Panel = (props) => {
       {data && (
         <div>
           <p className={classesList} id="text">
-            "{data.quotes[generateRandomNum(props.maxNum)].quote}"
+            "{data.quotes[generateRandomNum(maxNum)].quote}"
           </p>
           {/* got to move this span to the right */}
           <span id="author" className="text-[1em] text-right">
-            - {data.quotes[generateRandomNum(props.maxNum)].author}
+            - {data.quotes[generateRandomNum(maxNum)].author}
           </span>
         </div>
       )}
       <div className="flex flex-row justify-between mt-4 px-4">
         <div>
-          <a
-            id="tweet-quote"
-            title="Tweet this quote!"
-            target="_top"
-            href="https://twitter.com/intent/tweet?hashtags=quotes"
-          >
-            <FaTwitter />
-          </a>
+          <button className="inline-flex items-center rounded-md px-2 py-2 text-xl font-medium text-[rgba(255,255,255,1)] bg-[rgba(1,1,1,0.5)] ring-1 ring-inset ring-gray-500/10 hover:bg-[rgba(1,1,1,0.3)]">
+            <a
+              id="tweet-quote"
+              title="Tweet this quote!"
+              target="_top"
+              href="https://twitter.com/intent/tweet?hashtags=quotes"
+            >
+              <FaTwitter />
+            </a>
+          </button>
         </div>
         <div>
           <button
             onClick={onButtonClick}
             id="new-quote"
-            className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xl font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 hover:bg-purple-50"
+            className="inline-flex items-center rounded-md px-2 py-1 text-xl font-medium text-[rgba(255,255,255,1)] bg-[rgba(1,1,1,0.5)] ring-1 ring-inset ring-gray-500/10 hover:bg-[rgba(1,1,1,0.3)]"
           >
             New quote
           </button>
