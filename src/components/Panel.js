@@ -122,7 +122,7 @@ const Panel = () => {
     <div id="wrapper">
       <div
         id="quote-box"
-        className="bg-white rounded-[5px] m-3 text-[18px] shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_2px_rgba(0,0,0,0.5)]
+        className="bg-white rounded-[5px] m-3 shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_2px_rgba(0,0,0,0.5)]
     mx-auto my-auto max-w-xl px-6 py-6"
       >
         {data && (
@@ -132,7 +132,7 @@ const Panel = () => {
                 <FaQuoteLeft className={`${textField} mr-2 mt-2`} />
               </div>
               <p
-                className={`${textField} font-medium text-[1.75em] mb-4`}
+                className={`${textField} font-medium mb-4 text-[1em] lg:text-[1.75em]`}
                 id="text"
               >
                 {data.quotes[randNumber].quote}
@@ -141,7 +141,7 @@ const Panel = () => {
             <div>
               <p
                 id="author"
-                className={`${textField} text-[1em] float-right text-[rgba(52,34,36,1)]`}
+                className={`${textField} text-[0.75em] float-right lg:text-[1em]`}
               >
                 - {data.quotes[randNumber].author}
               </p>
@@ -151,7 +151,7 @@ const Panel = () => {
         <br></br>
         <div className="flex flex-row justify-between mt-8">
           <button
-            className={`inline-flex items-center rounded-[3px] px-2 py-1 text-xl font-medium text-white ${bgColor} hover:opacity-80`}
+            className={`inline-flex items-center rounded-[3px] px-1 py-0.5 text-sm font-medium text-white ${bgColor} hover:opacity-80 lg:px-2 lg:py-1 lg:text-xl`}
           >
             <a
               id="tweet-quote"
@@ -166,7 +166,7 @@ const Panel = () => {
           <button
             onClick={onButtonClick}
             id="new-quote"
-            className={`inline-flex items-center rounded-[3px] px-2 py-1 text-xl font-medium text-white ${bgColor} hover:opacity-80`}
+            className={`inline-flex items-center rounded-[3px] px-1 py-0.5 text-sm font-medium text-white ${bgColor} hover:opacity-80 lg:px-2 lg:py-1 lg:text-xl`}
           >
             New quote
           </button>
