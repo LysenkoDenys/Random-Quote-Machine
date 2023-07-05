@@ -18,69 +18,88 @@ const Panel = (props) => {
       data.quotes[randNumber].author
     : "#";
 
-  // ======================================================================
+  // COLORS================================================================
   let textField;
   let bgColor;
-  console.log(randColor); //
+  let bodyColor;
   switch (randColor) {
     case "stone":
       textField = "text-stone-400";
       bgColor = "bg-stone-400";
+      bodyColor = "#94a3b8";
       break;
     case "red":
-      textField = "text-[red]";
-      bgColor = "bg-[red]";
+      textField = "text-red-500";
+      bgColor = "bg-red-500";
+      bodyColor = "#ef4444";
       break;
     case "orange":
-      textField = "text-[orange]";
-      bgColor = "bg-[orange]";
+      textField = "text-orange-500";
+      bgColor = "bg-orange-500";
+      bodyColor = "#f97316";
       break;
     case "amber":
       textField = "text-amber-700";
       bgColor = "bg-amber-700";
+      bodyColor = "#b45309";
       break;
     case "yellow":
       textField = "text-yellow-400";
       bgColor = "bg-yellow-400";
+      bodyColor = "#facc15";
       break;
     case "lime":
-      textField = "text-[lime]";
-      bgColor = "bg-[lime]";
+      textField = "text-lime-500";
+      bgColor = "bg-lime-500";
+      bodyColor = "#84cc16";
       break;
     case "green":
-      textField = "text-[green]";
-      bgColor = "bg-[green]";
+      textField = "text-green-500";
+      bgColor = "bg-green-500";
+      bodyColor = "#22c55e";
       break;
     case "emerald":
       textField = "text-emerald-400";
       bgColor = "bg-emerald-400";
+      bodyColor = "#34d399";
       break;
     case "teal":
-      textField = "text-[teal]";
-      bgColor = "bg-[teal]";
+      textField = "text-teal-500";
+      bgColor = "bg-teal-500";
+      bodyColor = "#14b8a6";
       break;
     case "indigo":
       textField = "text-indigo-700";
       bgColor = "bg-indigo-700";
+      bodyColor = "#4338ca";
       break;
     case "sky":
       textField = "text-sky-400";
       bgColor = "bg-sky-400";
+      bodyColor = "#38bdf8";
       break;
     case "blue":
       textField = "text-blue-400";
       bgColor = "bg-blue-400";
+      bodyColor = "#60a5fa";
       break;
     default:
-      textField = "text-[red]";
-      bgColor = "bg-[red]";
+      textField = "text-red-700";
+      bgColor = "bg-red-700";
+      bodyColor = "#b91c1c";
   }
+  // ======================================================================
+
+  // BODY==================================================================
+  function setColor() {
+    document.documentElement.style.setProperty("--color-body", bodyColor);
+  }
+  setColor();
   // ======================================================================
 
   const onButtonClick = () => {
     setData(data);
     setClassesList(textField);
-    console.log(textField); //
     setRandomNum(generateRandomNum(maxNum));
   };
 
