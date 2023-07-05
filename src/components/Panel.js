@@ -123,7 +123,7 @@ const Panel = () => {
       <div
         id="quote-box"
         className="bg-white rounded-[5px] m-3 shadow-[0_35px_40px_-15px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_2px_rgba(0,0,0,0.5)]
-    mx-auto my-auto max-w-xl px-6 py-6"
+    mx-auto my-auto max-w-xl px-3 py-3 lg:px-6 lg:py-6"
       >
         {data && (
           <>
