@@ -3,10 +3,10 @@ import { FaTwitter, FaQuoteLeft } from "react-icons/fa";
 import generateRandomNum from "../utils/generateRandomNum";
 import generateRandomNumberForColor from "../utils/generateRandomNumberForColor";
 
-const Panel = (props) => {
+const Panel = () => {
   const [data, setData] = useState(null);
   const [randomNum, setRandomNum] = useState(null);
-  const [classesList, setClassesList] = useState(props.initialClassesList);
+  const [classesList, setClassesList] = useState(null);
   const maxNum = data ? data.quotes.length : "there is no data";
   const randNumber = generateRandomNum(maxNum);
   const randColor = generateRandomNumberForColor();
